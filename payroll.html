@@ -1,0 +1,132 @@
+ <head>
+<title>Simple Payroll</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.cdnfonts.com/css/pricedown" rel="stylesheet">
+
+        #payroll table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #payroll th, #payroll td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #payroll th {
+            background-color: powderblue;
+            color: green;
+          font-family: 'Pricedown Bl', sans-serif;
+        }
+
+        #payroll tbody td {
+            text-align: center;
+          font-family: "Lucida Console", "Courier New", monospace;
+        }
+  
+  
+</style>
+
+<body onload="initcart()"><div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="Main.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+  </div>
+</div>
+
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+<h1 class="w3-wide cursive">Simple Payroll</h1><br>
+<h5>
+  <center>
+    <table>
+      <tbody><tr>
+    
+        <th><label for="empName" class="inputlabel">Employee Name:</label>
+        </th><td><input id="empName" name="empName" type="text">
+      </td></tr>
+    <tr>
+    <th><label for="daysWorked" class="inputlabel">Days Worked:</label></th>
+      <td> <input id="daysWorked" name="daysWorked" type="number"></td>
+    </tr>
+    <tr>
+        <th><label for="dailyRate" class="inputlabel">Daily Rate:</label></th>
+      <td><input id="dailyRate" name="dailyRate" type="number"></td>
+    </tr>
+    <tr>
+      <th><label for="deductionAmount" class="inputlabel">Deduction Amount:</label></th>
+      <td><input id="deductionAmount" name="deductionAmount" type="number"></td>
+    </tr>
+      
+  </tbody></table>
+   <button onclick="addtoPayroll()" class="BtnAdd">Add to Payroll</button>
+  <br><br>
+
+  <button onclick="deleteFromPayroll()">Delete Number</button><input id="deleteLine" name="deleteLine" type="number"><table>
+       
+       
+  </table>
+    </center></h5>
+  
+  </div>
+  </div>
+<div id="payroll"></div>
+<script>
+        function addtoPayroll() {
+            var payrollItem = {
+                "empName": "",
+                "daysWorked": 0,
+                "dailyRate": 0,
+                "deductionAmount": 0,
+                "grossPay": 0,
+                "netPay": 0
+            };
+
+            payrollItem.empName = document.getElementById("empName").value;
+            payrollItem.daysWorked = parseInt(document.getElementById("daysWorked").value);
+            payrollItem.dailyRate = parseFloat(document.getElementById("dailyRate").value);
+            payrollItem.deductionAmount = parseFloat(document.getElementById("deductionAmount").value);
+
+            payrollItem.grossPay = payrollItem.daysWorked * payrollItem.dailyRate;
+            payrollItem.netPay = payrollItem.grossPay - payrollItem.deductionAmount;
+
+            payroll.push(payrollItem);
+
+            showPayroll();
+        }
+
+        function deleteFromPayroll() {
+            var toDelete = parseInt(document.getElementById("deleteLine").value);
+
+            var confirmed = confirm("Confirm to delete number " + toDelete + "?");
+            if (confirmed) {
+                payroll.splice(toDelete - 1, 1);
+                showPayroll();
+            }
+        }
+
+        function showPayroll() {
+            var tableHeader = "<thead><tr><th>No.</th><th>Employee Name</th><th>Days Worked</th><th>Daily Rate</th><th>Gross Pay</th><th>Deduction Amount</th><th>Net Pay</th></tr></thead>";
+            var tableBody = "<tbody>";
+
+            for (var i = 0; i < payroll.length; i++) {
+                var lineNumber = i + 1;
+                tableBody += "<tr><td>" + lineNumber + "</td><td>" + payroll[i].empName + "</td><td>" + payroll[i].daysWorked + "</td><td>" + payroll[i].dailyRate + "</td><td>" + payroll[i].grossPay + "</td><td>" + payroll[i].deductionAmount + "</td><td>" + payroll[i].netPay + "</td></tr>";
+            }
+
+            tableBody += "</tbody>";
+
+            var payrollTable = "<table>" + tableHeader + tableBody + "</table>";
+            document.getElementById("payroll").innerHTML = payrollTable;
+        }
+
+        var payroll = [];
+    </script>
+
+
