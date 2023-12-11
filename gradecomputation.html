@@ -1,0 +1,52 @@
+  <!doctype html>
+
+<html>
+  
+    <body>
+
+        <h1>This Page computes Grades</h1>
+        <br><br>
+        <label for="score">Type the Score:</label>
+        <input id="score" type="number">
+        <br>
+        <label for="item"> Type the item:</label>
+        <input id="item" type="number">
+        <br>
+        <label for="base"> Type the base:</label>
+        <input id="base" type="number" >
+        <br>
+        <label for="grade"> The grade is:</label>
+        <input id="grade" type="number" >
+
+        <br>
+        <button onclick="computegrade()">Compute Grade</button>
+        <br>
+        <button onclick="clearvalues()">Clear values</button>
+        <!-- Load external JavaScript -->
+        <br><br>
+        <a href="index.html"> Back to Home Page</a>
+        <script>
+        function computegrade()
+        {
+            var score,item,base,grade;
+
+            score = document.getElementById("score").value*1;
+            item = document.getElementById("item").value*1;
+            base = document.getElementById("base").value*1;
+
+            grade = (score/item * (100-base))+base;
+            document.getElementById("grade").value = grade;
+        }
+        function clearvalues()
+        {
+            var score,item,base,grade;
+                document.getElementById("score").value='';
+                document.getElementById("item").value='';
+                document.getElementById("base").value='';
+                document.getElementById("grade").value='';
+     
+        }
+        </script>
+    </body>
+
+</html>
