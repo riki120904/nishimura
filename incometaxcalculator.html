@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Income Tax </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: font-awesome}
+table th, td {
+      border: 1px solid black; border-collapse: collapse;
+        color: purple
+        }
+        #calculate {
+        text-align:center;
+         color:#b300b3;
+        }
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large">Go back to home page</a>
+  </div>
+</div>
+
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <h2 class="w3-wide">Income Tax</h2>
+     <br>
+     <h4>
+        <center>
+        <table>
+        <tbody><tr>
+          <th colspan="2" for="TaxableIncome">Taxable Income:</th>
+          <td><input id="TaxableIncome" type="number"></td>
+          <th><button id="calculate">Calculate</button></th>
+        </tr>
+
+         <tr>
+           <th colspan="2" for="IncomeTax">Income Tax</th>
+           <td><input id="IncomeTax" type="number" readonly=""></td>
+         </tr>
+        </tbody></table>
+        </center>
+    </h4>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById("calculate").addEventListener("click",
+    function ()
+{
+        var IncomeTax, TaxableIncome;
+        TaxableIncome = document.getElementById("TaxableIncome").value*1;
+    IncomeTax = 0;
+    if (TaxableIncome <= 250000)
+    {
+    IncomeTax = 0;
+    }
+    else if (TaxableIncome > 250000 && TaxableIncome <= 400000){
+    IncomeTax = (TaxableIncome - 250000) * .20;
+    }
+    else if (TaxableIncome > 400000 && TaxableIncome <= 800000){
+    IncomeTax = (TaxableIncome - 400000) * .25 + 30000;
+    }
+    else if (TaxableIncome > 800000 && TaxableIncome <= 2000000){
+    IncomeTax = (TaxableIncome - 800000) * .30 + 130000;
+    }
+    else if (TaxableIncome > 2000000 && TaxableIncome <= 8000000){
+    IncomeTax = (TaxableIncome - 2000000) * .32 + 490000;
+    }
+    else if (TaxableIncome > 8000000){
+    IncomeTax = (TaxableIncome - 800000) * .35 + 2410000;
+    }
+
+        document.getElementById("IncomeTax").value = IncomeTax;
+}
+);
+</script>
+
+</body>
+
+</html>
